@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tiny Worlds sign-in</title>
+<style>
+  body { font-family: Georgia, serif; max-width: 640px; margin: 48px auto; padding: 0 16px; line-height: 1.6; color: #2b2118; background: #fbf6ee; }
+  a { color: #8a4b1f; }
+</style>
+</head>
+<body>
+<h1>Tiny Worlds sign-in</h1>
+<p id="msg">Reading the sign-in result…</p>
+<p><code id="code" style="font-size:18px;word-break:break-all;background:#fff;padding:8px;display:block"></code></p>
+<p>This page only shows the code in your own browser. It sends nothing anywhere.</p>
+<script>
+  var q = new URLSearchParams(location.search);
+  var msg = document.getElementById("msg"), out = document.getElementById("code");
+  if (q.get("code")) {
+    msg.textContent = "Signed in. Copy this code and paste it back to the uploader (it expires in a few minutes):";
+    out.textContent = q.get("code") + "  state=" + (q.get("state") || "");
+  } else {
+    msg.textContent = "No code received: " + (q.get("error_description") || q.get("error") || "unknown error");
+  }
+</script>
+</body>
+</html>
